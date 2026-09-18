@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Kids from the block — Cult coffee & street brunch · Ταμπούρια, Πειραιάς</title>
+  <meta name="description" content="Kids from the block: freddo, σοκολάτες, pancakes, tortillas & σαλάτες στα Ταμπούρια. Αγίου Δημητρίου 83, Πειραιάς · 4.9★ από 1.400+ κριτικές · Delivery σε 25–30′ · 211 418 4223.">
+  <meta name="theme-color" content="#0D0B12">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Kids from the block — Cult coffee & street brunch">
+  <meta property="og:description" content="Freddos, pancake towers & nebula chocolates από τα Ταμπούρια. Delivery σε 25–30′.">
+  <meta property="og:image" content="assets/img/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+  <script>document.documentElement.classList.add('js');</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..900,0..100,0..1;1,9..144,400..900,0..100,0..1&family=JetBrains+Mono:wght@500;700;800&family=Manrope:wght@400..800&family=Sofia+Sans+Extra+Condensed:wght@800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind (layout utilities). Component styles live in style.css and win over utilities. -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --color-ink: #0D0B12;
+      --color-space: #171226;
+      --color-sun: #F2C542;
+      --color-lilac: #8653FF;
+      --color-coral: #FF5B37;
+      --color-paper: #FAF7EE;
+      --color-mint: #3DDC97;
+      --font-display: "Anton", "Sofia Sans Extra Condensed", sans-serif;
+      --font-mono: "JetBrains Mono", monospace;
+    }
+  </style>
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CafeOrCoffeeShop",
+    "name": "Kids from the block",
+    "image": "assets/img/logo-original.png",
+    "telephone": "+30 211 418 4223",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Αγίου Δημητρίου 83",
+      "addressLocality": "Πειραιάς",
+      "addressRegion": "Ταμπούρια",
+      "addressCountry": "GR"
+    },
+    "servesCuisine": ["Coffee", "Brunch", "Pancakes", "Sandwiches", "Salads"],
+    "priceRange": "€",
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "bestRating": "5", "reviewCount": "1400" }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#menu">Skip to menu</a>
+
+  <!-- ============================ PRELOADER -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader-inner">
+      <div class="preloader-face"><i></i><i></i></div>
+      <div class="preloader-count" id="preCount">000</div>
+      <div class="preloader-bar"><span></span></div>
+      <div class="mono" style="font-size:.72rem;font-weight:700">Fueling the rocket · Tambouria launchpad</div>
+    </div>
+  </div>
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ============================ CURSOR -->
+  <div class="cursor" aria-hidden="true">
+    <canvas class="trail-canvas" id="trail"></canvas>
+    <div class="cursor-ring" id="cursorRing"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-label" id="cursorLabel"></div>
+  </div>
+
+  <!-- ============================ NAV -->
+  <header class="nav" id="nav">
+    <a href="#launch" class="brand" aria-label="Kids from the block — αρχή">
+      <span class="brand-mark"><i></i></span>
+      <span class="brand-word">Kids <b>from the</b> block</span>
+    </a>
+    <nav class="nav-links" aria-label="Κύριο μενού">
+      <a href="#menu">Menu</a>
+      <a href="#tower">Tower</a>
+      <a href="#engine">Build</a>
+      <a href="#orbit">Find us</a>
+    </nav>
+    <div class="nav-right">
+      <span class="pill status" data-status><span class="status-dot"></span><span data-status-text>Open</span></span>
+      <button class="btn-icon sound-btn" id="soundBtn" type="button" aria-pressed="false" aria-label="Ήχος on/off" data-cursor="SOUND">
+        <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      </button>
+      <button class="cart-btn" type="button" data-open-cart aria-label="Άνοιγμα καλαθιού">
+        <i data-lucide="shopping-bag"></i>
+        <span class="cart-total" data-cart-total>0,00€</span>
+        <span class="cart-count" data-cart-count>0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- altitude meter -->
+  <nav class="altimeter" aria-label="Section progress">
+    <svg class="altimeter-rocket" id="altRocket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2c3 3 4 7 4 11l-4 3-4-3c0-4 1-8 4-11z"/><path d="M8 13l-3 3 3 1M16 13l3 3-3 1M12 16v5"/></svg>
+    <ol id="altList"></ol>
+  </nav>
+
+  <main id="top">
+    <!-- ============================ HERO / LAUNCHPAD -->
+    <section class="hero" id="launch" data-scene="Launch">
+      <div class="hero-nebula" aria-hidden="true"></div>
+      <canvas class="hero-stars" id="stars" aria-hidden="true"></canvas>
+      <div class="grid-floor" aria-hidden="true"></div>
+
+      <div class="hero-grid mx-auto w-full max-w-[1500px]">
+        <div class="hero-copy">
+          <div class="hero-meta" data-hero-in>
+            <span class="pill status" data-status><span class="status-dot"></span><span data-status-text>Open</span></span>
+            <span class="pill"><i data-lucide="map-pin" style="width:14px;height:14px"></i> Ταμπούρια · Πειραιάς</span>
+            <span class="pill">★ 4.9 · 1.400+ reviews</span>
+          </div>
+
+          <h1 class="hero-title">
+            <span class="sr-only">Kids from the block</span>
+            <span aria-hidden="true">
+              <span class="line line-1" data-split>KiDS</span>
+              <span class="line line-2"><span data-split>fRoM tHe</span><span class="title-sticker">est. 2020</span></span>
+              <span class="line line-3" data-split>bLoCK</span>
+            </span>
+          </h1>
+
+          <p class="hero-sub" data-hero-in>
+            Cult coffee &amp; street brunch, εκτοξευμένα από την <strong>Αγίου Δημητρίου 83</strong> κατευθείαν στην τροχιά σου.
+            Freddos, πύργοι από pancakes &amp; nebula σοκολάτες — στην πόρτα σου σε <strong>25–30′</strong>.
+          </p>
+          <div class="hero-ctas" data-hero-in>
+            <a href="#menu" class="btn btn--lg" data-magnetic data-cursor="GO!"><i data-lucide="orbit"></i> Explore the galaxy menu</a>
+            <button type="button" class="btn btn--lilac btn--lg" data-open-cart data-magnetic data-cursor="BEAM"><i data-lucide="rocket"></i> Teleport an order</button>
+          </div>
+        </div>
+
+        <div class="hero-visual" id="heroVisual" aria-hidden="true">
+          <div class="porthole" data-depth="12">
+            <svg class="porthole-rivets" id="rivets" viewBox="0 0 100 100"></svg>
+            <div class="porthole-glass"><div class="porthole-face"></div></div>
+            <div class="porthole-hud"><span></span><span></span><span></span><span></span></div>
+            <span class="porthole-tag">Target: craving · locked</span>
+          </div>
+          <div class="floaty f-badge" data-depth="30"><div style="position:relative">
+            <div data-badge></div>
+            <div class="badge-center">4.9★<small>1.400+<br>reviews</small></div>
+          </div></div>
+          <div class="floaty f-planet" data-depth="44"><div data-planet></div></div>
+          <div class="floaty f-cup" data-depth="56"><div data-art='{"kind":"ice","liquid":"#4A2512","foam":"#B7773F","straw":"#FF5B37"}'></div></div>
+          <div class="floaty f-cakes" data-depth="36"><div data-art='{"kind":"pancakes","syrup":"#4A2512","topping":"strawberry","n":4}'></div></div>
+          <span class="sparkle" data-sparkle="#F2C542" style="left:44%;top:-2%;--s:34px"></span>
+          <span class="sparkle" data-sparkle="#fff" style="left:88%;top:44%;--s:22px;--d:-1s"></span>
+          <span class="sparkle" data-sparkle="#FF8FC7" style="left:-4%;top:48%;--s:26px;--d:-2s"></span>
+          <span class="sparkle" data-sparkle="#fff" style="left:60%;top:96%;--s:18px;--d:-.5s"></span>
+        </div>
+      </div>
+
+      <div class="scroll-cue" aria-hidden="true"><i></i>Scroll to launch</div>
+    </section>
+
+    <!-- ============================ TICKERS -->
+    <div class="tickers">
+      <div class="ticker ticker--sun" role="note" aria-label="Delivery: 25–30 λεπτά · Δωρεάν πάνω από 10€ · Τηλ. 211 418 4223">
+        <div class="ticker-track" data-marquee aria-hidden="true"><span>
+          Delivery: 25–30 min <svg data-spark></svg> Free over 10€ <svg data-spark></svg> Call 211 418 4223 <svg data-spark></svg> 4.9★ · 1.400+ reviews <svg data-spark></svg> Ταμπούρια · Πειραιάς <svg data-spark></svg>
+        </span></div>
+      </div>
+      <div class="ticker ticker--lilac" aria-hidden="true">
+        <div class="ticker-track" data-marquee><span>
+          Freddo espresso <svg data-spark></svg> Pancake towers <svg data-spark></svg> Nebula chocolates <svg data-spark></svg> Street wraps <svg data-spark></svg> V60 single origin <svg data-spark></svg> Orbit salads <svg data-spark></svg>
+        </span></div>
+      </div>
+    </div>
+
+    <!-- ============================ MANIFESTO -->
+    <section class="manifesto" id="brief" data-scene="Brief">
+      <div class="mx-auto w-full max-w-[1500px]">
+        <span class="eyebrow">Mission brief // 083</span>
+        <p class="manifesto-text" data-words>
+          We brew freddos with <span class="serif">orbit-level precision</span>
+          <span class="inline-sticker" style="--c:#F2C542;--r:-6deg" data-mini='{"kind":"ice","liquid":"#4A2512","foam":"#B7773F","straw":"#FF5B37"}'></span>,
+          stack pancakes <span class="inline-sticker" style="--c:#FF5B37;--r:5deg" data-mini='{"kind":"pancakes","syrup":"#4A2512","topping":"strawberry"}'></span>
+          taller than the Piraeus cranes &amp; beam it all to <span class="serif">your block</span>
+          <span class="inline-sticker" style="--c:#FAF7EE;--r:-3deg" data-mini='{"kind":"shake","liquid":"#9C6BFF","drizzle":"#5B2FD6","topper":"sprinkles"}'></span>
+          in 25 minutes flat.
+        </p>
+
+        <div class="stats">
+          <div class="stat" data-reveal style="--r:-2deg;--c:var(--sun)">
+            <span class="stat-ico"><i data-lucide="star"></i></span>
+            <b data-count="4.9" data-decimals="1">4.9</b><span>Rating ★</span><small>από 1.400+ κριτικές</small>
+          </div>
+          <div class="stat" data-reveal style="--r:1.5deg;--c:var(--coral);--rd:.08s">
+            <span class="stat-ico"><i data-lucide="message-circle"></i></span>
+            <b><span data-count="1400" data-thousands>1.400</span>+</b><span>Reviews</span><small>και μετράμε</small>
+          </div>
+          <div class="stat" data-reveal style="--r:-1deg;--c:var(--mint);--rd:.16s">
+            <span class="stat-ico"><i data-lucide="timer"></i></span>
+            <b>25–30′</b><span>Delivery</span><small>από την κουζίνα στην πόρτα</small>
+          </div>
+          <div class="stat" data-reveal style="--r:2deg;--c:var(--pink);--rd:.24s">
+            <span class="stat-ico"><i data-lucide="coins"></i></span>
+            <b>2–3€</b><span>Min order</span><small>ανάλογα με τη ζώνη</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ ANATOMY OF A TOWER -->
+    <section class="anatomy" id="tower" data-scene="Tower">
+      <div class="anatomy-sticky">
+        <div class="anatomy-bg-word" aria-hidden="true">TOWER</div>
+        <div class="anatomy-copy">
+          <span class="eyebrow">Specimen 023 // signature</span>
+          <h2 class="section-title sticker-text">Anatomy<br>of a <span class="serif">tower</span></h2>
+          <p>Κάνε scroll για να αποσυναρμολογήσεις τον signature πύργο μας — οκτώ επίπεδα street ζάχαρης, φτιαγμένα τη στιγμή που παραγγέλνεις.</p>
+          <div class="anatomy-hud">
+            <div><span>Stack height</span><b data-stack-h>0.0 cm</b></div>
+            <div><span>Layers scanned</span><b data-stack-n>0/8</b></div>
+          </div>
+        </div>
+        <div class="stack" id="stack" aria-label="Kids From The Block Tower: φράουλες & cookie, σαντιγί, pancake, πραλίνα, pancake, κρέμα φουντουκιού & γκοφρέτα, pancake" role="img"></div>
+        <div class="anatomy-card">
+          <span class="mono">The Tower · ★ Legendary</span>
+          <h3>Kids From The Block Tower</h3>
+          <p>Pancakes, πραλίνα, κρέμα φουντουκιού, φράουλες, cookie crumble &amp; σαντιγί.</p>
+          <div class="row">
+            <span class="price" data-price-of="pan-kftb">8,50€</span>
+            <button type="button" class="btn btn--ink btn--sm" data-customize="pan-kftb" data-cursor="BEAM"><i data-lucide="rocket"></i> Beam it up</button>
+          </div>
+        </div>
+        <div class="anatomy-progress" aria-hidden="true"><i></i></div>
+      </div>
+    </section>
+
+    <!-- ============================ CATALOG -->
+    <section class="catalog" id="menu" data-scene="Menu">
+      <div class="mx-auto w-full max-w-[1500px]">
+        <div class="catalog-head">
+          <div>
+            <span class="eyebrow">Sector 04 // the menu</span>
+            <h2 class="section-title mt-4">Interstellar<br><span class="serif">tasting</span> catalog</h2>
+          </div>
+          <div>
+            <p>Collect them all. Κάθε κάρτα είναι ένα craving — πάτα <b>Customize &amp; Beam Up</b> για να το ρυθμίσεις ή το <b>+</b> για να πάει κατευθείαν στο καλάθι.</p>
+            <div class="catalog-meta">
+              <span class="pill" data-menu-count>33 collectibles</span>
+              <span class="pill">6 sectors</span>
+              <span class="pill" style="background:var(--sun)">★ Legendary drops</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="filterbar" id="filterbar">
+          <div class="filters" id="filters" role="toolbar" aria-label="Φίλτρο κατηγοριών"></div>
+          <label class="search">
+            <i data-lucide="search"></i>
+            <span class="sr-only">Αναζήτηση στο μενού</span>
+            <input type="search" id="search" placeholder="Scan the galaxy…" autocomplete="off" enterkeyhint="search">
+          </label>
+        </div>
+
+        <div class="grid" id="grid"></div>
+        <p class="sr-only" id="gridStatus" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- ============================ CRAVING ENGINE PROMO -->
+    <section class="engine-promo" id="engine" data-scene="Build">
+      <div class="engine-grid mx-auto w-full max-w-[1500px]">
+        <div class="big-dial" aria-hidden="true"><svg id="bigDial" viewBox="0 0 400 400"></svg></div>
+        <div>
+          <span class="eyebrow">Module 05 // build-your-own</span>
+          <h2 class="section-title mt-4">Craving<br><span class="serif">engine</span></h2>
+          <p class="lead">Ρύθμισε το ρόφημά σου σαν mission control. Γύρνα το dial της ζάχαρης, διάλεξε milk orbit, χτίσε το δικό σου sandwich — η κουζίνα παίρνει τις ακριβείς σου συντεταγμένες.</p>
+          <div class="build-cards">
+            <button type="button" class="build-card" data-customize="freddo-cappuccino" style="--c:var(--paper)" data-cursor="TUNE">
+              <span class="go"><i data-lucide="arrow-up-right"></i></span>
+              <span data-art-of="freddo-cappuccino"></span>
+              <span class="txt"><b>Tune a freddo</b><small>Sugar dial · milk orbit · boosters</small></span>
+            </button>
+            <button type="button" class="build-card" data-customize="byo-sandwich" style="--c:var(--coral)" data-cursor="BUILD">
+              <span class="go"><i data-lucide="arrow-up-right"></i></span>
+              <span data-art-of="byo-sandwich"></span>
+              <span class="txt"><b>Build a sandwich</b><small>Bread · protein · cheese · sauce</small></span>
+            </button>
+            <button type="button" class="build-card" data-customize="byo-omelette" style="--c:var(--lilac)" data-cursor="BUILD">
+              <span class="go"><i data-lucide="arrow-up-right"></i></span>
+              <span data-art-of="byo-omelette"></span>
+              <span class="txt"><b>Build an omelette</b><small>3 αυγά · γεμίσεις · side</small></span>
+            </button>
+          </div>
+          <ol class="steps">
+            <li><b>1</b>Pick your fuel</li>
+            <li><b>2</b>Tune it</li>
+            <li><b>3</b>Send via WhatsApp</li>
+            <li><b>4</b>Land in 25′</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ COORDINATES -->
+    <section class="coords" id="orbit" data-scene="Orbit">
+      <div class="mx-auto w-full max-w-[1500px]">
+        <span class="eyebrow" style="color:var(--sun)">Sector 06 // find us</span>
+        <h2 class="section-title mt-4">Tambouria<br><span class="serif">coordinates</span></h2>
+
+        <div class="coords-grid">
+          <div class="radar" role="img" aria-label="Χάρτης-ραντάρ: Kids from the block, Αγίου Δημητρίου 83, Ταμπούρια, Πειραιάς">
+            <svg class="map" id="radarMap" viewBox="0 0 400 400" aria-hidden="true"></svg>
+            <div class="radar-sweep" aria-hidden="true"></div>
+            <div class="radar-blip" aria-hidden="true"></div>
+            <div class="radar-label" aria-hidden="true">KFTB HQ<br>Αγ. Δημητρίου 83</div>
+            <div class="radar-coords" aria-hidden="true">37.95°N · 23.64°E · TAMBOURIA</div>
+          </div>
+
+          <div class="info-grid">
+            <div class="hud hud--wide">
+              <h3><i data-lucide="map-pin"></i> Landing zone</h3>
+              <p>Αγίου Δημητρίου 83<small>Ταμπούρια, Πειραιάς</small></p>
+              <a class="btn btn--sm" data-maps target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=%CE%91%CE%B3%CE%AF%CE%BF%CF%85%20%CE%94%CE%B7%CE%BC%CE%B7%CF%84%CF%81%CE%AF%CE%BF%CF%85%2083%2C%20%CE%A4%CE%B1%CE%BC%CF%80%CE%BF%CF%8D%CF%81%CE%B9%CE%B1%2C%20%CE%A0%CE%B5%CE%B9%CF%81%CE%B1%CE%B9%CE%AC%CF%82" data-cursor="MAP"><i data-lucide="navigation"></i> Open in Maps</a>
+            </div>
+            <div class="hud">
+              <h3><i data-lucide="phone"></i> Comms</h3>
+              <p><a href="tel:+302114184223">211 418 4223</a><small>Κάλεσε για παραγγελία</small></p>
+            </div>
+            <div class="hud">
+              <h3><i data-lucide="at-sign"></i> Signal</h3>
+              <p><a data-instagram href="https://www.instagram.com/kidsfromtheblock/" target="_blank" rel="noopener">@kidsfromtheblock</a><small>Drops, specials &amp; memes</small></p>
+            </div>
+            <div class="hud">
+              <h3><i data-lucide="clock"></i> Flight hours</h3>
+              <table class="hours" id="hours"><tbody></tbody></table>
+            </div>
+            <div class="hud">
+              <h3><i data-lucide="bike"></i> Delivery</h3>
+              <p>25–30′<small>Min 2–3€ · Free delivery over 10€</small></p>
+              <a class="efood-badge" data-efood href="https://www.e-food.gr/" target="_blank" rel="noopener" style="margin-top:14px" data-cursor="ORDER">
+                <i><i data-lucide="shopping-bag"></i></i>
+                <span>Order also on<b>e-food</b></span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <footer class="footer">
+          <div class="footer-marquee" aria-hidden="true">
+            <div class="ticker-track" data-marquee style="--speed:30s"><span>See you in orbit <em>✦</em> Kids from the block <em>✦</em></span></div>
+          </div>
+          <div class="footer-main">
+            <div class="footer-logo" role="img" aria-label="Kids from the block logo"></div>
+            <p class="big">Stay hungry,<br><span class="serif">stay</span> on the block.</p>
+            <nav class="footer-links" aria-label="Footer">
+              <a href="#menu"><i data-lucide="utensils"></i> Menu</a>
+              <a href="#engine"><i data-lucide="sliders-horizontal"></i> Build your own</a>
+              <a href="tel:+302114184223"><i data-lucide="phone"></i> 211 418 4223</a>
+              <a data-instagram href="https://www.instagram.com/kidsfromtheblock/" target="_blank" rel="noopener"><i data-lucide="at-sign"></i> Instagram</a>
+              <a data-efood href="https://www.e-food.gr/" target="_blank" rel="noopener"><i data-lucide="shopping-bag"></i> e-food</a>
+            </nav>
+          </div>
+          <div class="footer-bottom">
+            <span>© <span data-year>2026</span> Kids from the block · Αγίου Δημητρίου 83, Ταμπούρια, Πειραιάς</span>
+            <a href="#launch" class="to-top">Back to launch <i data-lucide="arrow-up"></i></a>
+          </div>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================ MOBILE DOCK -->
+  <nav class="dock" aria-label="Γρήγορη πλοήγηση">
+    <a href="#launch"><i data-lucide="house"></i>Home</a>
+    <a href="#menu"><i data-lucide="utensils"></i>Menu</a>
+    <button type="button" class="dock-main" data-open-cart aria-label="Καλάθι">
+      <span class="fab"><i data-lucide="shopping-bag"></i></span>
+      <span class="dock-count" data-cart-count data-n="0">0</span>
+      Cart
+    </button>
+    <a href="#engine"><i data-lucide="sliders-horizontal"></i>Build</a>
+    <a href="tel:+302114184223"><i data-lucide="phone"></i>Call</a>
+  </nav>
+
+  <!-- ============================ CRAVING ENGINE MODAL -->
+  <div class="overlay-root modal-root" id="engineModal" aria-hidden="true">
+    <div class="backdrop" data-close></div>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle" tabindex="-1">
+      <button type="button" class="btn-icon modal-close" data-close aria-label="Κλείσιμο"><i data-lucide="x"></i></button>
+      <div class="modal-art">
+        <div class="hudline"><span id="mNo">No. 001</span><span id="mCat"></span></div>
+        <div class="modal-stage" id="mStage"><div class="orbit-deco"></div><div class="orbit-deco two"></div></div>
+        <div>
+          <h2 id="mTitle">—</h2>
+          <p id="mDesc"></p>
+          <ul class="tags" id="mTags"></ul>
+        </div>
+      </div>
+      <div class="modal-controls">
+        <div class="modal-head">
+          <div><span class="mono">Craving engine v2.0</span><span class="display">Tune your order</span></div>
+        </div>
+        <form class="modal-scroll" id="mForm" data-lenis-prevent novalidate></form>
+        <div class="modal-foot">
+          <div class="stepper" role="group" aria-label="Ποσότητα">
+            <button type="button" id="mMinus" aria-label="Λιγότερα"><i data-lucide="minus"></i></button>
+            <output id="mQty" aria-live="polite">1</output>
+            <button type="button" id="mPlus" aria-label="Περισσότερα"><i data-lucide="plus"></i></button>
+          </div>
+          <button type="button" class="btn btn--lilac btn--lg" id="mAdd" data-cursor="BEAM"><i data-lucide="rocket"></i> <span id="mAddLabel">Beam up</span> · <b id="mTotal">0,00€</b></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================ CARGO BAY DRAWER -->
+  <div class="overlay-root drawer-root" id="cartDrawer" aria-hidden="true">
+    <div class="backdrop" data-close></div>
+    <aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="dTitle" tabindex="-1">
+      <div class="drawer-head">
+        <h2 id="dTitle">Cargo bay <span class="cart-count" data-cart-count>0</span></h2>
+        <button type="button" class="btn-icon" data-close aria-label="Κλείσιμο καλαθιού"><i data-lucide="x"></i></button>
+      </div>
+      <div class="drawer-steps" aria-hidden="true">
+        <span data-step="cart">01 · Cargo</span>
+        <span data-step="details">02 · Coordinates</span>
+        <span data-step="done">03 · Launch</span>
+      </div>
+      <div class="drawer-body" id="dBody" data-lenis-prevent></div>
+      <div class="drawer-foot" id="dFoot"></div>
+    </aside>
+  </div>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <!-- ============================ SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="assets/js/menu-data.js"></script>
+  <script src="assets/js/art.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
