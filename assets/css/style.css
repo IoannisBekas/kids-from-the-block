@@ -261,9 +261,9 @@ html.js .preloader.is-done { clip-path: inset(0 0 100% 0); pointer-events: none;
 .hero-title .line-1 { color: var(--sun); -webkit-text-stroke: .03em var(--ink); paint-order: stroke fill; text-shadow: .045em .045em 0 var(--coral); }
 .hero-title .line-2 { font-family: var(--f-serif); font-style: italic; font-weight: 700; font-variation-settings: "SOFT" 100, "WONK" 1; font-size: .4em; line-height: 1.1; color: var(--paper); margin: .06em 0 .02em .12em; display: flex; align-items: center; gap: .3em; }
 .hero-title .line-3 { color: transparent; -webkit-text-stroke: .018em var(--paper); text-shadow: none; }
-.hero-title .ch { display: inline-block; transition: transform .45s var(--ease-spring), color .25s; transform-origin: 50% 80%; }
+.hero-title .ch { display: inline-block; transition: translate .45s var(--ease-spring), rotate .45s var(--ease-spring), scale .45s var(--ease-spring), color .25s; transform-origin: 50% 80%; }
 .hero-title .line-3 .ch:hover, .hero-title .line-3 .ch.is-lit { color: var(--hc, var(--lilac)); -webkit-text-stroke-color: var(--ink); text-shadow: .04em .04em 0 var(--paper); }
-.hero-title .ch:hover { transform: translateY(-.08em) rotate(var(--r, -6deg)) scale(1.06); }
+.hero-title .ch:hover { translate: 0 -.08em; rotate: var(--r, -6deg); scale: 1.06; }
 .hero-title .line-1 .ch:hover { color: var(--hc, var(--sun)); }
 .title-sticker { display: inline-grid; place-items: center; height: 1.1em; padding: 0 .45em; border-radius: 999px; background: var(--coral); color: var(--ink); border: .06em solid var(--paper); font: 800 .34em/1 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; font-style: normal; transform: rotate(-6deg); white-space: nowrap; }
 
@@ -333,7 +333,7 @@ html.js .preloader.is-done { clip-path: inset(0 0 100% 0); pointer-events: none;
 .manifesto-text .w { display: inline-block; opacity: .22; transition: opacity .2s; }
 .manifesto-text .serif { text-transform: none; color: var(--paper); font-size: .92em; }
 .no-gsap .manifesto-text .w, .reduced .manifesto-text .w { opacity: 1; }
-.inline-sticker { display: inline-grid; place-items: center; vertical-align: -.08em; height: .92em; aspect-ratio: 1.6; margin: 0 .08em; border: .05em solid var(--ink); border-radius: 999px; background: var(--c, var(--sun)); overflow: hidden; box-shadow: .05em .05em 0 var(--ink); transform: rotate(var(--r, -4deg)); }
+.inline-sticker { display: inline-grid; place-items: center; vertical-align: -.08em; height: .92em; aspect-ratio: 1.6; margin: 0 .08em; border: .05em solid var(--ink); border-radius: 999px; background: var(--c, var(--sun)); overflow: hidden; box-shadow: .05em .05em 0 var(--ink); rotate: var(--r, -4deg); }
 .inline-sticker svg { width: 78%; height: 120%; margin-top: .1em; }
 .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 2vw, 24px); margin-top: clamp(56px, 8vw, 110px); }
 .stat { position: relative; padding: 22px 22px 20px; background: var(--paper); border: 3px solid var(--ink); border-radius: 26px; box-shadow: 7px 7px 0 var(--ink); rotate: var(--r, 0deg); transition: rotate .5s var(--ease-spring), transform .5s var(--ease-spring), opacity .9s var(--ease-out); }

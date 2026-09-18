@@ -1446,9 +1446,9 @@
       opacity: 1, stagger: 0.06, ease: 'none',
       scrollTrigger: { trigger: '[data-words]', start: 'top 80%', end: 'bottom 50%', scrub: true },
     });
-    gsap.from('[data-words] .inline-sticker', {
-      scale: 0, rotate: -40, duration: 0.8, ease: 'back.out(2.2)', stagger: 0.2,
-      scrollTrigger: { trigger: '[data-words]', start: 'top 70%' },
+    gsap.fromTo('[data-words] .inline-sticker', { scale: 0, rotate: -40 }, {
+      scale: 1, rotate: 0, duration: 0.8, ease: 'back.out(2.2)', stagger: 0.2, clearProps: 'transform',
+      scrollTrigger: { trigger: '[data-words]', start: 'top 70%', once: true },
     });
 
     // hero exit
@@ -1464,7 +1464,7 @@
       if (t.closest('.anatomy')) return;
       gsap.from(t, { y: 80, opacity: 0, duration: 1.1, ease: 'power4.out', scrollTrigger: { trigger: t, start: 'top 88%' } });
     });
-    gsap.from('.build-card', { y: 60, rotate: (i) => [-6, 4, -3][i] || 0, opacity: 0, duration: 0.9, stagger: 0.1, ease: 'back.out(1.5)', scrollTrigger: { trigger: '.build-cards', start: 'top 85%' } });
+    gsap.fromTo('.build-card', { y: 60, rotate: (i) => [-6, 4, -3][i] || 0, opacity: 0 }, { y: 0, rotate: 0, opacity: 1, duration: 0.9, stagger: 0.1, ease: 'back.out(1.5)', clearProps: 'transform,opacity', scrollTrigger: { trigger: '.build-cards', start: 'top 85%', once: true } });
     gsap.from('.hud', { y: 40, opacity: 0, duration: 0.8, stagger: 0.08, ease: 'power3.out', scrollTrigger: { trigger: '.info-grid', start: 'top 85%' } });
     gsap.from('.radar', { scale: 0.7, rotate: -40, opacity: 0, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: '.radar', start: 'top 85%' } });
   }
@@ -1472,12 +1472,13 @@
   function heroIntro() {
     if (!hasGSAP || reduced) return;
     const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
-    tl.from('.hero-title .ch', { yPercent: 120, rotate: 14, opacity: 0, duration: 1.1, stagger: 0.035, ease: 'back.out(1.8)' })
-      .from('.title-sticker', { scale: 0, rotate: -90, duration: 0.8, ease: 'back.out(2.5)' }, 0.5)
-      .from('[data-hero-in]', { y: 30, opacity: 0, duration: 0.9, stagger: 0.1 }, 0.35)
-      .from('.porthole', { scale: 0.5, rotate: -40, opacity: 0, duration: 1.4, ease: 'elastic.out(1, 0.7)' }, 0.15)
-      .from('.floaty', { scale: 0, opacity: 0, duration: 0.9, stagger: 0.08, ease: 'back.out(2)' }, 0.55)
-      .from('.tickers .ticker', { yPercent: 120, opacity: 0, duration: 1, stagger: 0.1 }, 0.6);
+    // explicit end values + clearProps so the resting state never depends on computed styles
+    tl.fromTo('.hero-title .ch', { yPercent: 120, rotate: 14, opacity: 0 }, { yPercent: 0, rotate: 0, opacity: 1, duration: 1.1, stagger: 0.035, ease: 'back.out(1.8)', clearProps: 'transform,opacity' })
+      .fromTo('.title-sticker', { scale: 0, rotate: -90 }, { scale: 1, rotate: -6, duration: 0.8, ease: 'back.out(2.5)', clearProps: 'transform' }, 0.5)
+      .fromTo('[data-hero-in]', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, stagger: 0.1, clearProps: 'transform,opacity' }, 0.35)
+      .fromTo('.porthole', { scale: 0.5, rotate: -40, opacity: 0 }, { scale: 1, rotate: 0, opacity: 1, duration: 1.4, ease: 'elastic.out(1, 0.7)' }, 0.15)
+      .fromTo('.floaty', { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.9, stagger: 0.08, ease: 'back.out(2)' }, 0.55)
+      .fromTo('.tickers .ticker', { yPercent: 120, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 1, stagger: 0.1, clearProps: 'transform,opacity' }, 0.6);
   }
 
   function counters() {
